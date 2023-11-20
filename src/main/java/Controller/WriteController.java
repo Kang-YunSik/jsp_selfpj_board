@@ -32,7 +32,7 @@ public class WriteController extends HttpServlet {
 
         // 1. 파일 업로드 처리 =============================
         // 업로드 디렉터리의 물리적 경로 확인
-        String saveDirectory = "E:\\kys_data\\git_data\\jsp_selfpj_board\\Uploads";
+        String saveDirectory = getServletContext().getRealPath("/Uploads");
 
         // 파일 업로드
         String originalFileName = "";

@@ -21,7 +21,7 @@ public class DownloadController extends HttpServlet {
         String idx = req.getParameter("idx");      // 게시물 일련번호
 
         // 파일 다운로드
-        fileupload.FileUtil.download(req, resp, "/Uploads", sfile, ofile);
+        fileupload.FileUtil.download(req, resp, "../Uploads", sfile, ofile);
 
         // 해당 게시물의 다운로드 수 1 증가
         MVCBoardDAO dao = new MVCBoardDAO();
