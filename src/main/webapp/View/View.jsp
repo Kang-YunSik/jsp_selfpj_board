@@ -34,7 +34,7 @@
         <td colspan="3" height="100">
             ${ vo.content }
             <c:if test="${ not empty vo.ofile and isImage eq true }">
-                <br><img src="E:/kys_data/git_data/jsp_selfpj_board/Uploads/${ vo.sfile }" style="max-width:100%;"/>
+                <br><img src="${pageContext.request.contextPath}/Uploads/${ vo.sfile }" style="max-width:100%;"/>
             </c:if>
         </td>
     </tr>
