@@ -30,6 +30,7 @@ public class WriteController extends HttpServlet {
             throws ServletException, IOException {
 
 
+        // String saveDirectory = "../Uploads";
         // 1. 파일 업로드 처리 =============================
         // 업로드 디렉터리의 물리적 경로 확인
         String saveDirectory = getServletContext().getRealPath("/Uploads");

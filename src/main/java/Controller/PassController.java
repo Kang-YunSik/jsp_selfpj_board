@@ -47,7 +47,7 @@ public class PassController extends HttpServlet {
                 dao.close();
                 if (result == 1) {  // 게시물 삭제 성공 시 첨부파일도 삭제
                     String saveFileName = vo.getSfile();
-                    fileupload.FileUtil.deleteFile(req, "../Uploads", saveFileName);
+                    fileupload.FileUtil.deleteFile(req, "/Uploads", saveFileName);
                 }
                 JSFunction.alertLocation(resp, "삭제되었습니다.", "../Controller/list.do");
             }
