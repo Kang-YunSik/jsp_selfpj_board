@@ -107,4 +107,49 @@ public class MVCBoardDAO extends DBConnPool {
         return result;
     }
 
+    // 주어진 일련번호에 해당하는 게시물을 DTO에 담아 반환합니다.
+    public MVCBoardVO selectView(String idx) {
+        MVCBoardVO vo = new MVCBoardVO();  // DTO 객체 생성
+        String query = "SELECT * FROM mvcboard WHERE idx=?";  // 쿼리문 템플릿 준비
+        try {
+            psmt = con.prepareStatement(query);  // 쿼리문 준비
+            psmt.setString(1, idx);  // 인파라미터 설정
+            rs = psmt.executeQuery();  // 쿼리문 실행
+
+            if (rs.next()) {  // 결과를 DTO 객체에 저장
+                vo.setIdx(rs.getString(1));
+                vo.setName(rs.getString(2));
+                vo.setTitle(rs.getString(3));
+                vo.setContent(rs.getString(4));
+                vo.setPostdate(rs.getDate(5));
+                vo.setOfile(rs.getString(6));
+                vo.setSfile(rs.getString(7));
+                vo.setDowncount(rs.getInt(8));
+                vo.setPass(rs.getString(9));
+                vo.setVisitcount(rs.getInt(10));
+            }
+        }
+        catch (Exception e) {
+            System.out.println("게시물 상세보기 중 예외 발생");
+            e.printStackTrace();
+        }
+        return vo;  // 결과 반환
+    }
+
+    // 주어진 일련번호에 해당하는 게시물의 조회수를 1 증가시킵니다.
+    public void updateVisitCount(String idx) {
+        String query = "UPDATE mvcboard SET "
+                + " visitcount=visitcount+1 "
+                + " WHERE idx=?";
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, idx);
+            psmt.executeQuery();
+        }
+        catch (Exception e) {
+            System.out.println("게시물 조회수 증가 중 예외 발생");
+            e.printStackTrace();
+        }
+    }
+
 }
