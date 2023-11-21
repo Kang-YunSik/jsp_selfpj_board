@@ -204,4 +204,33 @@ public class MVCBoardDAO extends DBConnPool {
         }
         return result;
     }
+
+    // 게시글 데이터를 받아 DB에 저장되어 있던 내용을 갱신합니다(파일 업로드 지원).
+    public int updatePost(MVCBoardVO vo) {
+        int result = 0;
+        try {
+            // 쿼리문 템플릿 준비
+            String query = "UPDATE mvcboard"
+                    + " SET title=?, name=?, content=?, ofile=?, sfile=? "
+                    + " WHERE idx=? and pass=?";
+
+            // 쿼리문 준비
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, vo.getTitle());
+            psmt.setString(2, vo.getName());
+            psmt.setString(3, vo.getContent());
+            psmt.setString(4, vo.getOfile());
+            psmt.setString(5, vo.getSfile());
+            psmt.setString(6, vo.getIdx());
+            psmt.setString(7, vo.getPass());
+
+            // 쿼리문 실행
+            result = psmt.executeUpdate();
+        }
+        catch (Exception e) {
+            System.out.println("게시물 수정 중 예외 발생");
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
